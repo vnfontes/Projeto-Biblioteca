@@ -1,26 +1,30 @@
-type Filme = {
+type Livro = {
     id : string;
     titulo : string;
     disponivel: boolean;
+    multa?: number;
+    data?:Date;
+    ano: number;
 };
-let locadora: Filme[] = [];
-function adicionarFilme(filme: Filme){
-    locadora.push(filme);
+let biblioteca: Livro[] = [];
+function adicionarLivro(livro: Livro){
+    biblioteca.push(livro);
 };
-function alugarFilme(id: string){
-    const filme = locadora.find((f) => f.id ===id);
-    if (filme && filme.disponivel){
-        filme.disponivel = false;
-        console.log(`Filme"${filme.titulo}" alugado!`);
+function alugarLivro(id: string){
+    const livro = biblioteca.find((f) => f.id ===id);
+    if (livro && livro.disponivel){
+        livro.disponivel = false;
+        console.log(`Livro"${livro.titulo}" alugado!`);
     }else{
-        console.log("filme nao disponivel");
+        console.log("Livro nao disponivel");
     }
 }
 function listarDisponiveis(){
-    return locadora.filter((f) =>f.disponivel);
+    return biblioteca.filter((f) =>f.disponivel);
 }
-adicionarFilme({id:"1", titulo:"matrix", disponivel:true});
-adicionarFilme({id:"2", titulo:"carros", disponivel:true});
+adicionarLivro({id:"1", titulo:"harry potter", disponivel:false, ano:1998});
+adicionarLivro({id:"2", titulo:"batman", disponivel:true, ano:1939});
+adicionarLivro({id:"3", titulo:"dc", disponivel:false, ano:1930});
 console.log("Filmes disponiveis:", listarDisponiveis().map(f =>f.titulo));
-alugarFilme("1");
+alugarLivro("1");
 console.log("apos aluguel:", listarDisponiveis().map(f => f.titulo));
